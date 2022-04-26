@@ -2,17 +2,18 @@ import dotenv from 'dotenv' // 환경변수(.env) 접근
 import express from 'express' // express
 import passport from 'passport' // 사용자 인증 구현(미들웨어)
 import morgan from 'morgan' // cliet에 요청한 메소드나 상태코드 로그 찍어줌
-import db from './app/models/index.js' 
-import api from "./app/routes/api.js"
+import db from './app/models/index.js'; 
+import api from "./app/routes/api.js";
 // import basic from "./app/routes/basic.js"
 // import board from "./app/routes/board.js"
 import user from "./app/routes/user.js"
 // import index from "./app/routes/index.js"
 // import todo from "./app/routes/todo.js"
-import getResponse from "./app/lambdas/getResponse.js"
+// import getResponse from "./app/lambdas/getResponse.js"
 import applyPassport from './app/lambdas/applyPassport.js'
 import applyDotenv from './app/lambdas/applyDotenv.js'
 
+// 비동기 처리
 async function startServer() {
     const app = express();
     const {mongoUri, port, jwtSecret } = applyDotenv(dotenv)
@@ -60,4 +61,5 @@ async function startServer() {
         console.log('***************** ***************** *****************')
     })
 }
+// default
 startServer()

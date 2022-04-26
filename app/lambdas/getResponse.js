@@ -1,0 +1,5 @@
+const getResponse = () => {
+    return {
+        
+    }
+}
