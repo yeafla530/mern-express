@@ -6,9 +6,9 @@ import db from './app/models/index.js';
 import api from "./app/routes/api.js";
 // import basic from "./app/routes/basic.js"
 // import board from "./app/routes/board.js"
-// import user from "./app/routes/user.js"
+import user from "./app/routes/user.js"
 import index from "./app/routes/index.js"
-// import todo from "./app/routes/todo.js"
+import table from "./app/routes/table.js"
 import getResponse from "./app/lambdas/getResponse.js"
 import applyPassport from './app/lambdas/applyPassport.js'
 import applyDotenv from './app/lambdas/applyDotenv.js'
@@ -17,15 +17,19 @@ import applyDotenv from './app/lambdas/applyDotenv.js'
 async function startServer() {
     const app = express();
     const {mongoUri, port, jwtSecret } = applyDotenv(dotenv)
+
     app.use(express.static('public'));
     app.use(express.urlencoded({extended: true}));
     app.use(express.json());
     const _passport = applyPassport(passport, jwtSecret);
     app.use(_passport.initialize());
+
+    // router (app.use)
     app.use("/", index);
     app.use("/api", api);
     // app.use("/todo", _passport.authenticate('jwt', { session: false}), todo);
-    // app.use("/user", user);
+    app.use("/user", user);
+    app.use("/table", table);
     app.use(morgan('dev'))
     db
         .mongoose
@@ -42,9 +46,9 @@ async function startServer() {
     
 
 
-    
+    // middleware
     app.all("*", function(_req, res) {
-    //   return getResponse.notFoundResponse(res, "페이지를 찾을 수 없습니다");
+        return getResponse.notFoundResponse(res, "페이지를 찾을 수 없습니다");
     });
     
     app.use((err, _req, res) => {
@@ -59,7 +63,7 @@ async function startServer() {
         console.log('***************** ***************** *****************')
     })       
 
-    // app.get('/now', cors(corsOption), (_req, res) => {
+    // app.get('/now', cors(corsOptions), (_req, res) => {
     //     res.json({"now":new Date().toLocaleString()})
     // })
 }

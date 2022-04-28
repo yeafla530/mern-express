@@ -1,6 +1,8 @@
 // 람다식은 일회성으로 작용
 // 람다식은 순수함수로 작성되어야한다 (함수안의 함수)
 // get : 파라미터x, return o
+
+// mongodb랑 연동되는 곳
 import { MongoClient } from 'mongodb'
 
 const getDatabase = () => {

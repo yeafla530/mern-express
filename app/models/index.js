@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 // import 시에는 확장자(.js) 필수
 import UserModel from './User.js'
+import TableModel from './Table.js'
+
 
 // mongoose 5부터는 지원 중단
 // 4에서는 전역모드
@@ -11,5 +13,7 @@ const db = {}
 db.mongoose = mongoose
 db.url = dotenv.MONGO_URI
 db.User = new UserModel(mongoose)
+db.Table = new TableModel(mongoose)
+
 
 export default db

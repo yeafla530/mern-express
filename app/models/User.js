@@ -71,4 +71,5 @@ export default function UserModel(mongoose) {
             )
         })
     }   
+    return mongoose.model('User', userSchema)
 }

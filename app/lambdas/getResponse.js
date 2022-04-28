@@ -1,3 +1,4 @@
+// server 응답에 대한 코드
 const getResponse = () => {
     return {
         successResponse(res, msg) {

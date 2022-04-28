@@ -1,6 +1,8 @@
 // 람다식은 일회성으로 작용
 // 람다식은 순수함수로 작성되어야한다 (함수안의 함수)
 // apply : 파라미터 o, 리턴 o
+
+// token받기
 const applyToken = headers => {
     if (headers && headers.authorization) {
         let parted = headers.authorization.split(' ');

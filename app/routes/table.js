@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
-import UserService from '../services/user.js'
+import TableService from '../services/table.js'
 dotenv.config()
 // local client와 통신시 cors오류 나지 않도록 설정
 const corsOptions = {
@@ -24,7 +24,8 @@ app.use(function (_req, res, next) {
 });
 
 
-app.post('/join', cors(corsOptions), (req, res) => {
-    UserService().join(req, res)
+app.post('/create', cors(corsOptions), (req, res) => {
+    console.log(req.body)
+    TableService().create(req, res)
 })
 export default app 
