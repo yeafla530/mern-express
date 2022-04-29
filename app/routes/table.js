@@ -23,9 +23,16 @@ app.use(function (_req, res, next) {
     next();
 });
 
+app.get('/getTables', cors(corsOptions), (req, res) => {
+    TableService().getTables(req, res)
+})
 
 app.post('/create', cors(corsOptions), (req, res) => {
-    console.log(req.body)
     TableService().create(req, res)
+})
+
+app.post('/delete',  cors(corsOptions), (req, res) => {  
+    TableService().delTable(req, res)
+    // console.log("확실?", req)
 })
 export default app 

@@ -11,7 +11,7 @@ export default function TableModel(mongoose) {
         //client user > join.js의 데이터 받아오기
         title: String,
         content: String,
-        created_at: String
+        created_at: Date,
     })
     // 내장 메소드로 함수를 정의함
     // User model을 사용하는 곳에서 comparePassword를 사용할 수 있음

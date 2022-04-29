@@ -23,7 +23,7 @@ export default function UserService() {
             // payload는 body에 있다
             // 1. data 받기
             const user = new User(req.body)
-            console.log(user)
+            // console.log(user)
             // 3. db연결 코드 짜기 (라우터 방식)
             user.save(function(err){
                 if(err) {

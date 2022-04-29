@@ -23,8 +23,8 @@ export default function UserModel(mongoose) {
     // 비밀번호 비교
     userSchema.methods.comparePassword = function(plainPassword, cb) {
         // cb는 콜백, 출력값 (err, isMath)이다
-        console.log(' >> plainPassword >> ' + plainPassword)
-        console.log(' >> this.password >> ' + this.password)
+        // console.log(' >> plainPassword >> ' + plainPassword)
+        // console.log(' >> this.password >> ' + this.password)
         let isMatch = false
         if (plainPassword === this.password) {
             isMatch = true

@@ -23,7 +23,7 @@ export default function TableService() {
             // payload는 body에 있다
             // 1. data 받기
             const table = new Table(req.body)
-            console.log(table)
+            // console.log(table)
             // 3. db연결 코드 짜기 (라우터 방식)
             table.save(function(err){
                 if(err) {
@@ -41,6 +41,23 @@ export default function TableService() {
                 }
             })
         },
+        // request는 안쓰니까 _req
+        // 주는건 없고 가져온다
+        getTables(_req, res){
+            Table.find().exec(
+                (err, table)=>{
+                    console.log('table')
+                    res.status(200).json(table)
+                }
+            )
+        },
+
+        delTable(req, res){
+            console.log('------------', req.body, req.delid)
+            Table.deleteOne({_id: req.body.delid}, function (err, table) {
+                res.status(200).json(table)
+            });
+        }
 
     }
 
