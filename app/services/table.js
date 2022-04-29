@@ -57,6 +57,11 @@ export default function TableService() {
             Table.deleteOne({_id: req.body.delid}, function (err, table) {
                 res.status(200).json(table)
             });
+        },
+
+        updateTable(req, _res){
+            Table.update({_id: req.body.delid}, req.body);
+
         }
 
     }
