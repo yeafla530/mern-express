@@ -35,4 +35,9 @@ app.post('/delete',  cors(corsOptions), (req, res) => {
     TableService().delTable(req, res)
     // console.log("확실?", req)
 })
+
+app.post('/update',  cors(corsOptions), (req, res) => {  
+    TableService().updateTable(req, res)
+    // console.log("확실?", req)
+})
 export default app 
