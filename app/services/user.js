@@ -7,7 +7,7 @@ import getDatabase from '../lambdas/getDatabase.js'
 export default function UserService() {
     // 알고리즘 짜기
     // 복붙
-    const User = db.User
+    const User = db.User 
     const dbo = getDatabase()
     // db에 접속
     const dbConnect = dbo.getDb()
@@ -23,7 +23,7 @@ export default function UserService() {
             // payload는 body에 있다
             // 1. data 받기
             const user = new User(req.body)
-            // console.log(user)
+            console.log("userTable", user)
             // 3. db연결 코드 짜기 (라우터 방식)
             user.save(function(err){
                 if(err) {
@@ -43,9 +43,50 @@ export default function UserService() {
         },
 
         login(req, res) {
-            const data = req.body
-            res.status(200).json({})
-        }
+            User.findOne({
+                userid: req.body.userid
+            }, function (err, user) {
+                if (err) throw err
+                if (!user) {
+                    console.log('1. error, no user')
+                    res
+                        .status(500)
+                        .send({message: 500})
+                        console.log('error', err)
+                } else {
+                    console.log('2. 진입은 성공')
+
+                    console.log(' ### 로그인 정보 : ' + JSON.stringify(user))
+                    user.comparePassword(req.body.password, function (_err, isMatch) {
+                        if (!isMatch) {
+                            console.log('3. 비밀번호 틀림')
+
+                            res
+                                .status(401)
+                                .send({message: 401});
+                        } else {
+                            console.log('3. 비밀번호 맞음')
+                            user.generateToken((err, user) => {
+                                if (err) {
+                                    console.log('4. 토큰 못얻어옴')
+
+                                    res
+                                        .status(400)
+                                        .send(err)
+                                } else {
+                                    // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
+                                    console.log('4. 토큰 얻음')
+                                    res
+                                        .status(200)
+                                        .json(user)
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+
+        },
     }
 
 

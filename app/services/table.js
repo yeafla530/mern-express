@@ -60,7 +60,7 @@ export default function TableService() {
         },
 
         updateTable(req, _res){
-            Table.update({_id: req.body.delid}, req.body);
+            Table.update({_id: req.body.updateid}, req.body);
 
         }
 
